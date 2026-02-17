@@ -28,7 +28,7 @@ body *::selection {
 .social-icons {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
   flex-shrink: 0;
   /* override any leftover absolute positioning */
   position: static;
