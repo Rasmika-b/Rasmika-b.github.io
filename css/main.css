@@ -18,7 +18,7 @@ body *::selection {
 .header-top {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   padding-bottom: 18px;
   border-bottom: 2px solid #3498db;
@@ -45,6 +45,11 @@ body *::selection {
 
 .social-icons a:hover {
   color: #428bca;
+}
+
+.header-top h1 {
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
