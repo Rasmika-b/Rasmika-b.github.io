@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research &middot; Rasmika Billa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .content { max-width: 860px; margin: 0 auto; padding: 0 2rem 60px; }
+
+    /* interests grid — light mode colored, dark mode plain */
+    .interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+    .interest-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; transition: border-color 0.2s; }
+    .interest-card:hover { border-color: var(--accent); }
+    /* dark mode — plain */
+    [data-theme="dark"] .interest-card { background: var(--bg2); }
+    /* light mode — subtle colors */
+    [data-theme="light"] .interest-card.ic1 { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+    [data-theme="light"] .interest-card.ic2 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+    [data-theme="light"] .interest-card.ic3 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+    [data-theme="light"] .interest-card.ic4 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+    [data-theme="light"] .interest-card.ic5 { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+    [data-theme="light"] .interest-card.ic6 { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+    .interest-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .interest-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+    .interest-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+    /* pub cards — light mode colored, dark mode plain */
+    .pub-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: border-color 0.2s; }
+    .pub-card:hover { border-color: var(--accent); }
+    [data-theme="dark"] .pub-card { background: var(--bg2); }
+    [data-theme="light"] .pub-card.pc-green  { background: linear-gradient(135deg, #f1f8f4, #e8f5e9); }
+    [data-theme="light"] .pub-card.pc-blue   { background: linear-gradient(135deg, #f0f6ff, #e3f2fd); }
+
+    .pub-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .pub-venue-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pub-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+    .badge-springer { background: var(--tag-green-bg); color: var(--tag-green-text); }
+    .badge-ieee     { background: var(--tag-blue-bg);  color: var(--tag-blue-text); }
+    .badge-patent   { background: var(--tag-purple-bg); color: var(--tag-purple-text); }
+    .pub-year { font-size: 0.78rem; color: var(--muted); background: var(--bg3); padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+    .pub-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+    .pub-title a { color: var(--text); }
+    .pub-title a:hover { color: var(--accent); }
+    .pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+    .pub-abstract { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+    .pub-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pub-link { font-size: 0.8rem; padding: 5px 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
+    .pub-link.primary { background: var(--accent); color: #fff !important; font-weight: 600; }
+    .pub-link.primary:hover { opacity: 0.85; }
+    .pub-link.secondary { border: 1px solid var(--border); color: var(--text); }
+    .pub-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* patent card — light mode colored, dark mode plain */
+    .patent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; display: flex; gap: 20px; transition: border-color 0.2s; }
+    .patent-card:hover { border-color: var(--tag-purple-text); }
+    [data-theme="dark"]  .patent-card { background: var(--bg2); }
+    [data-theme="light"] .patent-card { background: linear-gradient(135deg, #f5f0ff, #ede7f6); }
+    .patent-icon-wrap { width: 56px; height: 56px; border-radius: 12px; background: var(--tag-purple-bg); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
+    .patent-body { flex: 1; }
+    .patent-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .patent-title a { color: var(--text); }
+    .patent-title a:hover { color: var(--accent); }
+    .patent-meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; }
+    .patent-desc { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+    .patent-highlights { display: flex; gap: 8px; flex-wrap: wrap; }
+    .patent-chip { background: var(--tag-purple-bg); color: var(--tag-purple-text); font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+
+    @media (max-width: 600px) { .interests-grid { grid-template-columns: 1fr 1fr; } .patent-card { flex-direction: column; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">rb<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/research/" class="active">Research</a></li>
+    <li><a href="/collections/">Collections</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    <a href="/resume.pdf" target="_blank" class="nav-cta"><i class="fas fa-download"></i> Resume</a>
+  </div>
+</nav>
+<main>
+  <div class="page-hero">
+    <p class="label">Academic work</p>
+    <h1>Research &amp; Patents</h1>
+    <p style="white-space:nowrap">Published in Springer Nature and IEEE &middot; One filed patent &middot; AI for finance, healthcare &amp; HCI</p>
+  </div>
+  <div class="content">
+    <p class="section-label">Research Interests</p>
+    <div class="interests-grid">
+      <div class="interest-card ic1"><div class="interest-icon">📈</div><div class="interest-name">AI for Finance</div><div class="interest-desc">Factor investing, portfolio optimization, quantitative research</div></div>
+      <div class="interest-card ic2"><div class="interest-icon">🧠</div><div class="interest-name">LLMs &amp; GenAI</div><div class="interest-desc">Agentic systems, RAG, interpretability, production deployment</div></div>
+      <div class="interest-card ic3"><div class="interest-icon">🏥</div><div class="interest-name">Healthcare AI</div><div class="interest-desc">Predictive analytics, survival analysis, clinical data modeling</div></div>
+      <div class="interest-card ic4"><div class="interest-icon">👁️</div><div class="interest-name">Computer Vision</div><div class="interest-desc">Motion detection, gesture recognition, HCI</div></div>
+      <div class="interest-card ic5"><div class="interest-icon">📊</div><div class="interest-name">Predictive Modeling</div><div class="interest-desc">Time-series, quantile regression, risk modeling</div></div>
+      <div class="interest-card ic6"><div class="interest-icon">🔬</div><div class="interest-name">MLOps</div><div class="interest-desc">Production ML pipelines, model monitoring, CI/CD</div></div>
+    </div>
+
+    <p class="section-label">Publications</p>
+
+    <div class="pub-card pc-green">
+      <div class="pub-top">
+        <div class="pub-venue-row"><span class="pub-badge badge-springer">Springer Nature</span><span class="pub-badge badge-springer" style="background:transparent;border:1px solid var(--tag-green-text)">ICIAI 2025</span></div>
+        <span class="pub-year">Jan 2026</span>
+      </div>
+      <div class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-981-95-0887-7_12#Abs1" target="_blank">AI for Factor Investing: A Comprehensive Survey</a></div>
+      <div class="pub-authors">Rasmika Billa et al.</div>
+      <div class="pub-abstract">A comprehensive survey of AI-driven advancements in factor investing. Covers ML for pattern recognition, RL for adaptive portfolio management, and GenAI for trading and risk control.</div>
+      <div class="pub-links">
+        <a href="https://link.springer.com/chapter/10.1007/978-981-95-0887-7_12#Abs1" target="_blank" class="pub-link primary"><i class="fas fa-external-link-alt"></i> Read Paper</a>
+        <a href="#" class="pub-link secondary"><i class="fas fa-quote-right"></i> Cite</a>
+      </div>
+    </div>
+
+    <div class="pub-card pc-blue">
+      <div class="pub-top">
+        <div class="pub-venue-row"><span class="pub-badge badge-ieee">IEEE</span><span class="pub-badge badge-ieee" style="background:transparent;border:1px solid var(--tag-blue-text)">InHeNce 2021</span></div>
+        <span class="pub-year">Jun 2021</span>
+      </div>
+      <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/9537264" target="_blank">Scheduling for Healthcare Centre for COVID-19: Deep Learning and Genetic Algorithmic Approach</a></div>
+      <div class="pub-authors">Rasmika Billa et al.</div>
+      <div class="pub-abstract">A unified model addressing COVID-19 case detection, prediction, and healthcare staff scheduling. Designed to be deployable as a web application for real-time pandemic response.</div>
+      <div class="pub-links">
+        <a href="https://ieeexplore.ieee.org/document/9537264" target="_blank" class="pub-link primary"><i class="fas fa-external-link-alt"></i> Read Paper</a>
+        <a href="#" class="pub-link secondary"><i class="fas fa-quote-right"></i> Cite</a>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top:40px">Patent</p>
+    <div class="patent-card">
+      <div class="patent-icon-wrap">🔏</div>
+      <div class="patent-body">
+        <div class="pub-venue-row" style="margin-bottom:6px"><span class="pub-badge badge-patent">Filed Patent</span><span class="pub-year">Jun 2021</span></div>
+        <div class="patent-title"><a href="https://vitap.irins.org/profile/302822" target="_blank">Py &ndash; Digital Writing Pad (Python Based Motion Sensing Digital Writing Pad)</a></div>
+        <div class="patent-meta">App No. 202141026740</div>
+        <div class="patent-desc">A motion-based digital writing tool using Transformer architecture that enables users to capture ideas on-screen with any stylus. Utilizes Deep Average Network for hand motion detection, significantly reducing hardware costs while making digital writing accessible to underserved communities.</div>
+        <div class="patent-highlights"><span class="patent-chip">72% cost reduction</span><span class="patent-chip">Transformer Architecture</span><span class="patent-chip">Deep Average Network</span><span class="patent-chip">Motion Detection</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer><p>Rasmika Billa &middot; <a href="mailto:rb5719@nyu.edu">rb5719@nyu.edu</a></p></footer>
+<script src="/js/theme.js"></script>
+</body>
+</html>

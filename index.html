@@ -1,316 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <title>Rasmika Billa</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rasmika Billa — AI/ML Engineer, NYU MS CS.">
+  <title>Rasmika Billa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PAGE WRAPPER ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── HERO: TAG CLOUD ── */
+    .hero-section {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 48px 0 24px;
+    }
+    .hero-name {
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 6px;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-tagline { font-size: 0.88rem; color: var(--muted); margin-bottom: 24px; }
+
+    .tag-cloud {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center;
+      max-width: 580px;
+      margin-bottom: 28px;
+    }
+    .tc-tag { padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+    .tc-blue   { background: #ddf4ff; color: #0550ae; }
+    .tc-purple { background: #fbefff; color: #8250df; }
+    .tc-green  { background: #dafbe1; color: #116329; }
+    .tc-orange { background: #fff1e5; color: #bc4c00; }
+    .tc-pink   { background: #ffeff7; color: #bf3989; }
+    .tc-teal   { background: #e0f7fa; color: #00695c; }
+    [data-theme="dark"] .tc-blue,
+    [data-theme="dark"] .tc-purple,
+    [data-theme="dark"] .tc-green,
+    [data-theme="dark"] .tc-orange,
+    [data-theme="dark"] .tc-pink,
+    [data-theme="dark"] .tc-teal   { background: var(--bg3); color: var(--muted); }
+
+    .hero-bio {
+      max-width: 480px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+    .hero-actions {
+      display: flex; gap: 10px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 18px;
+    }
+    .social-row { display: flex; gap: 16px; justify-content: center; }
+    .social-row a { color: var(--muted); font-size: 1.3rem; transition: color 0.2s; }
+    .social-row a:hover { color: var(--accent); }
+
+    /* ── STAT STRIP ── */
+    .stat-strip {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 32px 0;
+    }
+    .stat {
+      flex: 1; text-align: center;
+      padding: 20px 0;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-size: 1.7rem; font-weight: 800; }
+    .stat-number.c1 { color: var(--accent); }
+    .stat-number.c2 { color: var(--accent); }
+    .stat-number.c3 { color: var(--accent); }
+    .stat-number.c4 { color: var(--accent); }
+    [data-theme="light"] .stat-number.c1 { color: #0969da; }
+    [data-theme="light"] .stat-number.c2 { color: #8250df; }
+    [data-theme="light"] .stat-number.c3 { color: #1a7f37; }
+    [data-theme="light"] .stat-number.c4 { color: #bc4c00; }
+    .stat-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+
+    /* ── JOURNEY ── */
+    .section-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 28px; text-align: center;
+    }
+
+    .exp-timeline { position:relative; width:100%; }
+    .exp-timeline::before {
+      content:''; position:absolute;
+      left:50%; top:0; bottom:0;
+      width:2px; background:var(--border);
+      transform:translateX(-50%);
+    }
+    .exp-item {
+      display:grid;
+      grid-template-columns: 1fr 120px 1fr;
+      align-items:center;
+      padding-bottom:36px;
+      position:relative;
+    }
+    .exp-item:last-child { padding-bottom:0; }
+    .exp-logo-col {
+      grid-column:2;
+      display:flex; align-items:center; justify-content:center;
+      z-index:2; position:relative;
+      background:var(--bg);
+      padding:6px 0;
+    }
+    .exp-logo-col img { object-fit:contain; }
+    .exp-item:nth-child(1) .exp-logo-col img { width:105px; height:105px; }
+    .exp-item:nth-child(2) .exp-logo-col img { width:90px;  height:90px;  }
+    .exp-item:nth-child(3) .exp-logo-col img { width:100px; height:100px; }
+    .exp-item:nth-child(4) .exp-logo-col img { width:70px;  height:70px;  }
+    .exp-item:nth-child(5) .exp-logo-col img { width:113px; height:113px; }
+    .exp-item:nth-child(6) .exp-logo-col img { width:65px;  height:65px;  }
+    [data-theme="dark"] .exp-logo-col img { display:none; }
+    [data-theme="dark"] .exp-logo-col::after {
+      content: attr(data-icon);
+      width:48px; height:48px; border-radius:50%;
+      background:var(--bg3); border:2px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem;
+    }
+    [data-theme="light"] .exp-logo-col::after { display:none; }
+    .exp-item:nth-child(odd)  .exp-text { grid-column:3; text-align:left;  padding-left:20px; }
+    .exp-item:nth-child(even) .exp-text { grid-column:1; grid-row:1; text-align:right; padding-right:20px; }
+    .exp-item:nth-child(even) .exp-logo-col { grid-column:2; grid-row:1; }
+    .exp-role { font-weight:700; font-size:0.95rem; }
+    .exp-team { font-size:0.82rem; font-weight:600; margin-top:3px; }
+    .exp-date { font-size:0.73rem; color:var(--muted); margin-top:3px; }
+    [data-theme="light"] .exp-item:nth-child(1) .exp-team { color:#6a1b9a; }
+    [data-theme="light"] .exp-item:nth-child(2) .exp-team { color:#1565c0; }
+    [data-theme="light"] .exp-item:nth-child(3) .exp-team { color:#6a1b9a; }
+    [data-theme="light"] .exp-item:nth-child(4) .exp-team { color:#e65100; }
+    [data-theme="light"] .exp-item:nth-child(5) .exp-team { color:#b71c1c; }
+    [data-theme="light"] .exp-item:nth-child(6) .exp-team { color:#1a6b3a; }
+    [data-theme="dark"]  .exp-team { color:var(--accent); }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-xs-12 header-top">
-                    <h1 id="name-block">
-                        <a href="/">Rasmika Billa</a>
-                    </h1>
-                
-                    <div class="social-icons">
-                        <a target="_blank" href="https://in.linkedin.com/in/rasmika-billa-b06b50199/">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a target="_blank" href="https://github.com/Rasmika-b/">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <ul class="nav-bar">
-                        <!-- <li>
-                            <a href="#bio">Bio</a>
-                        </li> -->
-                        <li>
-                            <a href="#career">Career</a>
-                        </li>
-                        <li>
-                            <a href="#projects">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#patent">Patent</a>
-                        </li>
-                        <li>
-                            <a href="#publications">Publications</a>
-                        </li>
-                        <li>
-                            <a href="#curricular">Certifications</a>
-                        </li>
-                        <li>
-                            <a href="#cocurriculars">Co-Curriculars</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="page-content">
-            <article class="post">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="content"></h1>
-                    </div>
-                </div>
-                <section class="post-content">
-                    <!-- <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <img src="img/mypic4.jpg">
-                        </div>
-                        <div class="col-sm-6 col-xs-12" style="margin-bottom: 0;">
-                        "Data Scientist"
-                        <br>
-                        <br>
-                        "ML Enthusiast"
-                        <br>
-                        <br>
-                        "AI Engineering"
-                        <br>
-                        <br>
-                        "Bookworm"
-                        <br>
-                        <br>
-                        "Foodie & Adventurer"
-                        <br>
-                        <br>
-                        <a target="_blank" href="https://in.linkedin.com/in/rasmika-billa-b06b50199/">"LinkedIN"</a> 
-                        <br>
-                        <br>
-                        <a target="_blank" href="https://github.com/Rasmika-b/">"GitHub"</a> 
-                        </div>
-                    </div> -->
-                    <!-- <hr> -->
-                    <p>
-                        <a name="/bio"></a>
-                    </p>
-                    <h1 id="bio">Greetings!</h1>
-                    <p>
-                        To keep things simple:<br><ul class="pul">
-                        <li>I am pursuing my master of science in Computer Science at NYU - Courant(CIMS).
-                        </li><br><li> I like to Code, Debug, Analyze, and build the optimal solutions for various succumbed scenarios. I get 
-                        immense joy from quality time spent with my family and friends. Organizing excursions and embarking on vacations are activities 
-                        that I hold dear.</li></ul>
 
-                    </p>
-                    <hr>
-                    <p>
-                        <a name="/career"></a>
-                    </p>
-                    <h1 id="career">Career</h1>
-                    <p>
-                        <ul class="pul">
-                        <li>To start, Closer Match GP, is a startup in London. The aim is to quickly and effectively 
-                        connect General Practitioners (GPs) with openings. I worked on the data aspect, where I built and maintained a database, containing all 
-                        the GP-related data.</li><br>
-                        <li>Then, I was given the opportunity to work at TenderCuts, 
-                        a meat business in India, where I developed a food packaging system that reduced paper usage, a system for tracking inventories 
-                        using Google Data Studio, and EDA on performance metrics.</li><br>
-                        </ul>
-                    </p>
-                    <div class="row" id="timeline-logos">
-                        <div class="col-xs-3">
-                            <div class="logo-wrap">
-                                <span class="helper"></span>
-                                <a target="_blank" href="https://www.interplay.vc/">
-                                    <img src="img/interplay-logo.png">
-                                </a>
-                            </div>
-                            <div class="logo-desc">
-                                AI Engineer Intern
-                                <br>
-                                May 2025 - Aug 2025
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="logo-wrap">
-                                <span class="helper"></span>
-                                <a target="_blank" href="https://www.shell.com/">
-                                    <img src="img/shell-logo.png">
-                                </a>
-                            </div>
-                            <div class="logo-desc">
-                                Data Scientist
-                                <br>
-                                Aug 2022 - Aug 2024
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="logo-wrap">
-                                <span class="helper"></span>
-                                <a target="_blank" href="https://www.tendercuts.in/">
-                                    <img src="img/tendercuts-logo.png">
-                                </a>
-                            </div>
-                            <div class="logo-desc">
-                                Data Analyst
-                                <br>
-                                Sep 2021 - Jul 2022
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="logo-wrap">
-                                <span class="helper"></span>
-                                <a target="_blank" href="https://closermatchgp.com/">
-                                    <img src="img/closergp-logo.png">
-                                </a>
-                            </div>
-                            <div class="logo-desc">
-                                Data Engineering Intern
-                                <br>
-                                2021 (Mini-Project)
-                            </div>
-                        </div>
-                        <!-- <div class="col-xs-3">
-                            <div class="logo-wrap">
-                                <span class="helper"></span>
-                                <a target="_blank" href="https://in.linkedin.com/company/vcriate">
-                                    <img src="img/vcriate-logo.PNG">
-                                </a>
-                            </div>
-                            <div class="logo-desc">
-                                Content Creator
-                                <br>
-                                2021 (Mini-Project)
-                            </div>
-                        </div> -->
-                    </div>
-                    <p>
-                        <ul class="pul">
-                        <li>After that, I spent 2 years at Shell working on some really cool projects. I built a chatbot using GenAI that made it super easy for different terminals to access their safety data, and put together a RAG system with LangChain for checking report quality. I also set up data pipelines in Azure to monitor catalysts, and honestly, one of my favorite things was using OCR to digitize all that messy unstructured data!</li><br>
-                        <li>Most recently, I interned at Interplay where I deployed AI-driven reporting pipelines on GCP for 14+ client portfolios. I also built an asset allocation optimization model using Differential Evolution, which was pretty exciting since I got to translate what portfolio managers actually needed into real production workflows.</li><br>
-                        </ul>
-                    </p>
-                    <hr>
-                    <p>
-                        <a name="/projects"></a>
-                    </p>
-                    <h1 id="projects">Projects</h1>
-                    <p>
-                        Here are the projects successfully completed to date. You can access comprehensive project descriptions by 
-                        selecting the respective title. You can also view all the projects <a target="_blank" href="https://github.com/Rasmika-b?tab=repositories">here</a>. 
-                    </p>
-                    <ul class="pul">
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Predicting-Loan-Default">Credit Guard</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Economics-Pricing_Strategies">Pricing Strategies</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Cartoon-Pok-mon-feature-prediction-Analysis">Cartoon Features</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/The-Freebird-App">The Freebird</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/COVID-19-Health-Records">COVID-19 Health Records</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Unemployment-Issue-In-India">Unemployment Issue in India</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Time-to-Event-Analysis">LifeTrack (Time to Event)</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Buy_from_farmers">Buy from farmers</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Inter-Process-Communication">Inter Process Communication</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Draw-in-air-AI-Canvas">Draw in air-AI based Canvas</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Groceries-Store-App">Grocery Store App</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Clap-Switch">Clap Switch</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Comparison_Study_UDP_TCP">Comparison Study (UDP and TCP)</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/Drone-Initiation">Drone- Initiation</a></li>
-                        <li><a target="_blank" href="https://github.com/Rasmika-b/The-360-Panel">The 360 Panel</a></li>
-                    </ul>
-                    <hr>
-                    <p>
-                        <a name="/patent"></a>
-                    </p>
-                    <h1 id="patent">Patent</h1>
-                    <p>
-                        <a target="_blank" href="https://vitap.irins.org/profile/302822">Writing Pad (Python Based Motion Sensing Digital Writing Pad)</a> 
-                    </p>
-                    <p>
-                        The Motion Based Digital writing pad which allows the user to freely cohort his/her ideas with the help of any 
-                        feasible stylus directly onto the screen. It significantly reduces the expenditure by utilising deep learning techniques 
-                        for hand motion detection. The system connects the most backward and economically deprived section of the 
-                        community to directly interact with modern day advancements by not only being a spectator but an active participant.
-                    </p>
-                    <!-- <p>
-                        Figure: Architecture of Transformers for Object detection and motion sensing
-                    </p>
-                    <p>
-                        <img src="img/Dan.PNG">
-                    </p> -->
-                    <hr>
-                    <p>
-                        <a name="/publications"></a>
-                    </p>
-                    <h1 id="publication">Publications</h1>
-                    <p>
-                        <a target="_blank" href="https://link.springer.com/chapter/10.1007/978-981-95-0887-7_12#Abs1">AI for Factor Investing: A Comprehensive Survey</a>
-                    </p>
-                    <p>
-                        This survey explores AI-driven advancements in factor investing, including machine learning for pattern recognition, reinforcement learning for adaptive portfolio management, and algorithmic trading for execution, while addressing challenges like overfitting and model interpretability to enhance precision in asset management. 
-                    <p>
-                    <p>
-                        <a target="_blank" href="https://ieeexplore.ieee.org/document/9537264">Scheduling for Healthcare Centre for COVID-19: Deep Learning and Genetic Algorithmic Approach</a>
-                    </p>
-                    <p>
-                        The research covers different key issues to be taken care of in pandemic situations 
-                        i.e. detection and prediction of cases and then scheduling for health care centers and medical staff in a single model that 
-                        can easily be made as a web application. 
-                    <p>
-                        Figure: Spotlight on cases, Network Model, RNN Model, Scheduling
-                    </p>
-                    <p>
-                        <img src="img/research.PNG">
-                    </p>
-                    <hr>
-                    <p>
-                        <a name="/curricular"></a>
-                    </p>
-                    <h1 id="curricular">Certifications</h1>
-                    <p>
-                        You can view all the certificates <a target="_blank" href="https://github.com/Rasmika-b/Certificates">here</a> !!
-                        <ul class="pul">
-                            <li>[Microsoft] Azure AI Fundamentals (AI - 900)</li>
-                            <li>[Microsoft] Azure Data Fundamentals (DP - 100)</li>
-                            <li>[Nasscom] Associate Analytics</li>
-                            <li>[Coursera] University of Michigan - Python</li>
-                            <li>[Coursera] UC Davis - SQL for Data Science</li>
-                            <li>[Coursera] Git + GitHub for Open Source Collaboration </li>
-                            <li>[Coursera] UC Davis - Visual Analytics with Tableau</li>
-                            <li>[IBM] Cognitive Class.ai - Big Data</li>
-                        </ul>
-                    </p>
-                    <hr>
-                    <p>
-                        <a name="/cocurriculars"></a>
-                    </p>
-                    <h1 id="cocurriculars">Co-Curriculars</h1>
-                    <p>
-                        <ul class="pul">
-                            <p style="margin-bottom:0;"><li>During my time in school, I participated in the world's largest practical session, in which 2000 students had to perform two chemistry experiments to break a Guinness World Record <a target="_blank" href="https://economictimes.indiatimes.com/industry/services/education/india-enters-guinness-book-for-conducting-worlds-largest-practical-lesson/articleshow/50209635.cms">(Link)</a></li></p>
-                            <p><li>I have been actively engaged in teaching, both professionally and through volunteering. I take recitations for Discrete Mathematics and Data Structures at NYU. And as a member of the <a target="_blank" href="https://robinhoodarmy.com/">RHA (Robin Hood Army)</a>, I teach basic English to those in need.</li></p>
-                        </ul>
-                    </p>
-                    <hr>
-                </section>
-            </article>
-        </div>
+<nav>
+  <a href="/" class="nav-logo">rb<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/research/">Research</a></li>
+    <li><a href="/collections/">Collections</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <a href="/resume.pdf" target="_blank" class="nav-cta"><i class="fas fa-download"></i> Resume</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <div class="hero-section">
+      <h1 class="hero-name">Rasmika <span>Billa</span></h1>
+      <p class="hero-tagline">MS Computer Science &middot; NYU Courant</p>
+      <div class="tag-cloud">
+        <span class="tc-tag tc-blue">AI/ML Engineer</span>
+        <span class="tc-tag tc-purple">LLM Builder</span>
+        <span class="tc-tag tc-green">NYU Courant</span>
+        <span class="tc-tag tc-orange">Shell Alumni</span>
+        <span class="tc-tag tc-pink">Interplay Alumni</span>
+        <span class="tc-tag tc-teal">RAG Systems</span>
+        <span class="tc-tag tc-blue">Agentic AI</span>
+        <span class="tc-tag tc-purple">Researcher</span>
+        <span class="tc-tag tc-green">Data Science</span>
+        <span class="tc-tag tc-orange">Python</span>
+        <span class="tc-tag tc-pink">LangChain</span>
+        <span class="tc-tag tc-teal">Published Author</span>
+      </div>
+      <p class="hero-bio">I build production-grade AI systems. LLM-powered agentic pipelines, RAG architectures, and ML models that ship to real users.<br>Previously at Shell and Interplay.</p>
+      <div class="hero-actions">
+        <a href="/projects/" class="btn-primary" style="padding:6px 14px;font-size:0.8rem;"><i class="fas fa-code"></i> View Projects</a>
+        <a href="/research/" class="btn-outline" style="padding:6px 14px;font-size:0.8rem;"><i class="fas fa-flask"></i> Research</a>
+        <a href="mailto:rb5719@nyu.edu" class="btn-outline" style="padding:6px 14px;font-size:0.8rem;"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+      <div class="social-row">
+        <a href="https://in.linkedin.com/in/rasmika-billa-b06b50199/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Rasmika-b/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:rb5719@nyu.edu" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
     </div>
+
+    <!-- STAT STRIP -->
+    <div class="stat-strip">
+      <div class="stat"><div class="stat-number c1">3+</div><div class="stat-label">Years Exp.</div></div>
+      <div class="stat"><div class="stat-number c2">2</div><div class="stat-label">Publications</div></div>
+      <div class="stat"><div class="stat-number c3">1</div><div class="stat-label">Patent</div></div>
+      <div class="stat"><div class="stat-number c4">15+</div><div class="stat-label">Projects</div></div>
+    </div>
+
+    <!-- JOURNEY -->
+    <div style="margin-top:40px; margin-bottom:60px;">
+      <p class="section-title">Journey</p>
+      <div class="exp-timeline">
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="🔬"><img src="img/nyu-lagone.png" alt="NYU Langone"></div>
+          <div class="exp-text">
+            <div class="exp-role">Research Assistant</div>
+            <div class="exp-team">NYU &middot; Predictive Analytics Lab</div>
+            <div class="exp-date">Nov 2024 &ndash; Present</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="🏢"><img src="img/interplay-logo.png" alt="Interplay"></div>
+          <div class="exp-text">
+            <div class="exp-role">AI Engineer Intern</div>
+            <div class="exp-team">Interplay &middot; Ascend FO Team</div>
+            <div class="exp-date">May &ndash; Aug 2025</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="🎓"><img src="img/nyu-logo.png" alt="NYU"></div>
+          <div class="exp-text">
+            <div class="exp-role">MS Computer Science</div>
+            <div class="exp-team">NYU Courant &middot; AI Concentration</div>
+            <div class="exp-date">Sep 2024 &ndash; Present</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="⚡"><img src="img/shell-logo.png" alt="Shell"></div>
+          <div class="exp-text">
+            <div class="exp-role">Data Scientist</div>
+            <div class="exp-team">Royal Dutch Shell &middot; Asset Management</div>
+            <div class="exp-date">Aug 2022 &ndash; Aug 2024</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="📊"><img src="img/tendercuts-logo.png" alt="Tendercuts"></div>
+          <div class="exp-text">
+            <div class="exp-role">Data Analyst</div>
+            <div class="exp-team">Tendercuts &middot; Business Intelligence</div>
+            <div class="exp-date">Aug 2021 &ndash; Jul 2022</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-logo-col" data-icon="🎓"><img src="img/vit-logo.svg" alt="VIT"></div>
+          <div class="exp-text">
+            <div class="exp-role">BTech Computer Science</div>
+            <div class="exp-team">Vellore Institute of Technology</div>
+            <div class="exp-date">Aug 2018 &ndash; Jul 2022</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Rasmika Billa &middot; <a href="mailto:rb5719@nyu.edu">rb5719@nyu.edu</a></p>
+</footer>
+
+<script src="js/theme.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

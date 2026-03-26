@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects &middot; Rasmika Billa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .content { max-width: 900px; margin: 0 auto; padding: 0 2rem 60px; }
+
+    /* filter bar */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-btn { padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .strip-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+
+    /* featured cards */
+    .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+    .feat-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; position: relative; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; }
+    .feat-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .feat-card.c-blue   { background: linear-gradient(135deg, #1a2a3a, #1f3a5f); }
+    .feat-card.c-purple { background: linear-gradient(135deg, #2a1a3a, #3a1f5a); }
+    .feat-card.c-teal   { background: linear-gradient(135deg, #1a3a3a, #1f4a4a); }
+    [data-theme="light"] .feat-card.c-blue   { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+    [data-theme="light"] .feat-card.c-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+    [data-theme="light"] .feat-card.c-teal   { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
+    .fc-badge { position: absolute; top: 16px; right: 16px; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.5px; background: var(--tag-purple-bg); color: var(--tag-purple-text); }
+    .fc-icon { font-size: 2rem; margin-bottom: 12px; }
+    .fc-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .fc-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+    .fc-impact { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .impact-chip { background: var(--tag-green-bg); color: var(--tag-green-text); font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+    .fc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .fc-tag { background: rgba(0,0,0,0.15); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; }
+    [data-theme="light"] .fc-tag { background: rgba(0,0,0,0.07); }
+    .fc-links { display: flex; gap: 10px; }
+    .fc-links a { font-size: 0.8rem; color: var(--accent); display: flex; align-items: center; gap: 5px; }
+    .fc-links a:hover { text-decoration: underline; }
+
+    /* all projects grid — colored in light mode only */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .proj-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    /* dark mode — plain */
+    [data-theme="dark"] .proj-card { background: var(--bg2); }
+    /* light mode — subtle colors */
+    [data-theme="light"] .proj-card.c1 { background: linear-gradient(135deg, #e8f4fd, #d6eaf8); }
+    [data-theme="light"] .proj-card.c2 { background: linear-gradient(135deg, #f5eef8, #ebdef0); }
+    [data-theme="light"] .proj-card.c3 { background: linear-gradient(135deg, #e9f7ef, #d5f5e3); }
+    [data-theme="light"] .proj-card.c4 { background: linear-gradient(135deg, #fef9e7, #fdebd0); }
+    [data-theme="light"] .proj-card.c5 { background: linear-gradient(135deg, #e8f8f5, #d1f2eb); }
+    [data-theme="light"] .proj-card.c6 { background: linear-gradient(135deg, #f4ecf7, #e8daef); }
+    [data-theme="light"] .proj-card.c7 { background: linear-gradient(135deg, #eafaf1, #d5f5e3); }
+    [data-theme="light"] .proj-card.c8 { background: linear-gradient(135deg, #fdfefe, #eaeded); }
+    [data-theme="light"] .proj-card.c9 { background: linear-gradient(135deg, #eaf2fb, #d6eaf8); }
+
+    .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .proj-icon { font-size: 1.3rem; }
+    .proj-links a { color: var(--muted); font-size: 0.85rem; margin-left: 8px; transition: color 0.2s; }
+    .proj-links a:hover { color: var(--accent); }
+    .proj-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+    .proj-desc { font-size: 0.8rem; color: var(--text-secondary); flex: 1; margin-bottom: 12px; line-height: 1.5; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .proj-tag { background: var(--bg3); color: var(--muted); padding: 2px 7px; border-radius: 4px; font-size: 0.7rem; }
+
+    .hidden { display: none; }
+
+    @media (max-width: 700px) { .featured-grid { grid-template-columns: 1fr; } .projects-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 420px) { .projects-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">rb<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects/" class="active">Projects</a></li>
+    <li><a href="/research/">Research</a></li>
+    <li><a href="/collections/">Collections</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon" id="themeIcon"></i></button>
+    <a href="/resume.pdf" target="_blank" class="nav-cta"><i class="fas fa-download"></i> Resume</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-hero">
+    <p class="label">What I've built</p>
+    <h1>Projects</h1>
+    <p style="white-space:nowrap">A mix of AI Agents, ML Models, Data Pipelines, and more...</p>
+  </div>
+  <div class="content">
+
+    <!-- filter bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="llm">LLM / GenAI</button>
+      <button class="filter-btn" data-filter="ml">ML / Modeling</button>
+      <button class="filter-btn" data-filter="data">Data Engineering</button>
+      <button class="filter-btn" data-filter="cv">Computer Vision</button>
+    </div>
+
+    <!-- all projects — ordered by creation date (newest first) -->
+    <p class="strip-label" style="margin-bottom:14px">All Projects</p>
+    <div class="projects-grid" id="projectsGrid">
+
+      <div class="proj-card c1" data-tags="llm">
+        <div class="proj-top"><span class="proj-icon">🔬</span><div class="proj-links"><a href="https://github.com/Rasmika-b/research_agent" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Research Summarizer Agent</div>
+        <div class="proj-desc">LangGraph agentic AI with web search, LLM summarization, and structured report generation. Fully local with no cloud APIs.</div>
+        <div class="proj-tags"><span class="proj-tag">LangGraph.js</span><span class="proj-tag">Ollama</span><span class="proj-tag">TypeScript</span></div>
+      </div>
+
+      <div class="proj-card c2" data-tags="llm">
+        <div class="proj-top"><span class="proj-icon">🧠</span><div class="proj-links"><a href="https://github.com/Rasmika-b/knowledge_agent_project" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Personal Knowledge Agent</div>
+        <div class="proj-desc">Local RAG system where you paste text, build a knowledge base, and chat with it. No cloud APIs required.</div>
+        <div class="proj-tags"><span class="proj-tag">LangChain.js</span><span class="proj-tag">Ollama</span><span class="proj-tag">React</span></div>
+      </div>
+
+      <div class="proj-card c3" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">💳</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Predicting-Loan-Default" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Credit Guard</div>
+        <div class="proj-desc">Credit risk model predicting 12-month loan default probability. AUC 0.797 with XGBoost and influential observation analysis.</div>
+        <div class="proj-tags"><span class="proj-tag">XGBoost</span><span class="proj-tag">Python</span><span class="proj-tag">Risk Modeling</span></div>
+      </div>
+
+      <div class="proj-card c4" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">🐦</span><div class="proj-links"><a href="https://github.com/Rasmika-b/The-Freebird-App" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">The Freebird App</div>
+        <div class="proj-desc">Service marketplace with a job recommendation system. RNN achieved 96.78% accuracy for skill level and Logistic Regression 95.67% for job matching.</div>
+        <div class="proj-tags"><span class="proj-tag">RNN</span><span class="proj-tag">Flask</span><span class="proj-tag">ML</span></div>
+      </div>
+
+      <div class="proj-card c5" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">🏥</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Time-to-Event-Analysis" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">LifeTrack</div>
+        <div class="proj-desc">Survival analysis on patient data using Kaplan-Meier, log-rank test, and Cox regression to predict event timing and mortality.</div>
+        <div class="proj-tags"><span class="proj-tag">Survival Analysis</span><span class="proj-tag">R</span><span class="proj-tag">Statistics</span></div>
+      </div>
+
+      <div class="proj-card c6" data-tags="cv">
+        <div class="proj-top"><span class="proj-icon">✍️</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Draw-in-air-AI-Canvas" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Draw in Air &ndash; AI Canvas</div>
+        <div class="proj-desc">Computer vision-based air drawing canvas using hand gesture detection. Enables real-time drawing without physical input devices.</div>
+        <div class="proj-tags"><span class="proj-tag">Computer Vision</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Python</span></div>
+      </div>
+
+      <div class="proj-card c7" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">📈</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Economics-Pricing_Strategies" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Pricing Strategies</div>
+        <div class="proj-desc">Economic pricing strategy analysis and modeling using statistical methods and data visualization.</div>
+        <div class="proj-tags"><span class="proj-tag">Economics</span><span class="proj-tag">Python</span><span class="proj-tag">Statistics</span></div>
+      </div>
+
+      <div class="proj-card c8" data-tags="data">
+        <div class="proj-top"><span class="proj-icon">🌾</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Buy_from_farmers" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Buy from Farmers</div>
+        <div class="proj-desc">Direct farmer-to-consumer marketplace app connecting agricultural producers with buyers, reducing middlemen.</div>
+        <div class="proj-tags"><span class="proj-tag">Web App</span><span class="proj-tag">JavaScript</span><span class="proj-tag">SQL</span></div>
+      </div>
+
+      <div class="proj-card c9" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">🦠</span><div class="proj-links"><a href="https://github.com/Rasmika-b/COVID-19-Health-Records" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">COVID-19 Health Records</div>
+        <div class="proj-desc">Analysis and visualization of COVID-19 health records data to identify patterns and support decision-making.</div>
+        <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Data Analysis</span><span class="proj-tag">Visualization</span></div>
+      </div>
+
+      <div class="proj-card c1" data-tags="data">
+        <div class="proj-top"><span class="proj-icon">🛒</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Groceries-Store-App" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Grocery Store App</div>
+        <div class="proj-desc">Full-stack grocery store application with inventory management and customer-facing shopping interface.</div>
+        <div class="proj-tags"><span class="proj-tag">Full Stack</span><span class="proj-tag">JavaScript</span><span class="proj-tag">SQL</span></div>
+      </div>
+
+      <div class="proj-card c2" data-tags="ml">
+        <div class="proj-top"><span class="proj-icon">🎮</span><div class="proj-links"><a href="https://github.com/Rasmika-b/Cartoon-Pok-mon-feature-prediction-Analysis" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">Cartoon Feature Prediction</div>
+        <div class="proj-desc">ML analysis and feature prediction on Pokémon cartoon data — classification and pattern recognition.</div>
+        <div class="proj-tags"><span class="proj-tag">ML</span><span class="proj-tag">Python</span><span class="proj-tag">Classification</span></div>
+      </div>
+
+      <div class="proj-card c3" data-tags="cv">
+        <div class="proj-top"><span class="proj-icon">☀️</span><div class="proj-links"><a href="https://github.com/Rasmika-b/The-360-Panel" target="_blank"><i class="fab fa-github"></i></a></div></div>
+        <div class="proj-name">The 360 Panel</div>
+        <div class="proj-desc">Single-axis solar tracker prototype using LDR sensors and Arduino Uno. Boosts solar panel efficiency by 35 to 60 percent by aligning panels with maximum sunlight intensity.</div>
+        <div class="proj-tags"><span class="proj-tag">Arduino</span><span class="proj-tag">Hardware</span><span class="proj-tag">Renewable Energy</span></div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer><p>Rasmika Billa &middot; <a href="mailto:rb5719@nyu.edu">rb5719@nyu.edu</a></p></footer>
+<script src="/js/theme.js"></script>
+<script>
+  // filter logic
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('#projectsGrid .proj-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      btns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const f = this.dataset.filter;
+      cards.forEach(card => {
+        if (f === 'all' || card.dataset.tags === f) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
