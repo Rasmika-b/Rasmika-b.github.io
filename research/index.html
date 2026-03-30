@@ -7,44 +7,40 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/css/style.css">
   <style>
+    /* Same 6 palettes as /projects/ (c1–c6) */
     .content { max-width: 860px; margin: 0 auto; padding: 0 2rem 60px; }
 
-    /* interests grid — light mode colored, dark mode plain */
     .interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
     .interest-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; transition: border-color 0.2s; }
-    .interest-card:hover { border-color: var(--accent); }
-    /* dark mode — plain */
-    [data-theme="dark"] .interest-card { background: var(--bg2); }
-    /* Option F — Monochromatic Blue */
-    [data-theme="light"] .interest-card.ic1 { background: #dbeafe; }
-    [data-theme="light"] .interest-card.ic2 { background: #bfdbfe; }
-    [data-theme="light"] .interest-card.ic3 { background: #e0f2fe; }
-    [data-theme="light"] .interest-card.ic4 { background: #dbeafe; }
-    [data-theme="light"] .interest-card.ic5 { background: #bfdbfe; }
-    [data-theme="light"] .interest-card.ic6 { background: #e0f2fe; }
-    .interest-icon { display: none; }
     .interest-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
-    .interest-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+    .interest-desc { font-size: 0.75rem; line-height: 1.4; }
 
-    /* pub cards — light mode colored, dark mode plain */
     .pub-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: border-color 0.2s; }
-    .pub-card:hover { border-color: var(--accent); }
-    [data-theme="dark"] .pub-card { background: var(--bg2); }
-    [data-theme="light"] .pub-card.pc-green  { background: #bfdbfe; }
-    [data-theme="light"] .pub-card.pc-blue   { background: #dbeafe; }
-
     .pub-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
     .pub-venue-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .pub-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.5px; }
-    .badge-springer { background: var(--tag-green-bg); color: var(--tag-green-text); }
-    .badge-ieee     { background: var(--tag-blue-bg);  color: var(--tag-blue-text); }
-    .badge-patent   { background: var(--tag-purple-bg); color: var(--tag-purple-text); }
-    .pub-year { font-size: 0.78rem; color: var(--muted); background: var(--bg3); padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+    .pub-badge.badge-springer,
+    .pub-badge.badge-ieee,
+    .pub-badge.badge-patent {
+      background: var(--bg3);
+      color: var(--text-secondary);
+    }
+    .pub-badge-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .pub-year { font-size: 0.78rem; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
     .pub-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
-    .pub-title a { color: var(--text); }
-    .pub-title a:hover { color: var(--accent); }
-    .pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
-    .pub-abstract { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+    .pub-title a { text-decoration: none; }
+    .pub-title a:hover,
+    .patent-title a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .pub-authors { font-size: 0.82rem; margin-bottom: 10px; }
+    .pub-abstract { font-size: 0.85rem; line-height: 1.65; margin-bottom: 14px; }
     .pub-links { display: flex; gap: 10px; flex-wrap: wrap; }
     .pub-link { font-size: 0.8rem; padding: 5px 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
     .pub-link.primary { background: var(--accent); color: #fff !important; font-weight: 600; }
@@ -52,22 +48,239 @@
     .pub-link.secondary { border: 1px solid var(--border); color: var(--text); }
     .pub-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* patent card — light mode colored, dark mode plain */
-    .patent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; display: flex; gap: 20px; transition: border-color 0.2s; }
-    .patent-card:hover { border-color: var(--tag-purple-text); }
-    [data-theme="dark"]  .patent-card { background: var(--bg2); }
-    [data-theme="light"] .patent-card { background: #e0f2fe; }
-    .patent-icon-wrap { display: none; }
-    .patent-body { flex: 1; }
+    .patent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: border-color 0.2s; }
     .patent-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .patent-title a { color: var(--text); }
-    .patent-title a:hover { color: var(--accent); }
-    .patent-meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; }
-    .patent-desc { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+    .patent-title a { text-decoration: none; }
+    .patent-meta { font-size: 0.8rem; margin-bottom: 10px; }
+    .patent-desc { font-size: 0.84rem; line-height: 1.6; margin-bottom: 12px; }
     .patent-highlights { display: flex; gap: 8px; flex-wrap: wrap; }
-    .patent-chip { background: var(--tag-purple-bg); color: var(--tag-purple-text); font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+    .patent-chip {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+    }
 
-    @media (max-width: 600px) { .interests-grid { grid-template-columns: 1fr 1fr; } .patent-card { flex-direction: column; } }
+    /* —— c1 sky blue —— */
+    [data-theme="light"] .interest-card.c1 { background: #dbeafe; border-color: #3b82f6; }
+    [data-theme="light"] .interest-card.c1 .interest-name { color: #1e3a8a; }
+    [data-theme="light"] .interest-card.c1 .interest-desc { color: #1d4ed8; }
+    [data-theme="light"] .interest-card.c1:hover { border-color: #2563eb; }
+    [data-theme="light"] .pub-card.c1 { background: #dbeafe; border-color: #3b82f6; }
+    [data-theme="light"] .pub-card.c1:hover { border-color: #2563eb; }
+    [data-theme="light"] .pub-card.c1 .pub-title,
+    [data-theme="light"] .pub-card.c1 .pub-title a { color: #1e3a8a; }
+    [data-theme="light"] .pub-card.c1 .pub-title a:hover { color: #172554; }
+    [data-theme="light"] .pub-card.c1 .pub-authors { color: #1d4ed8; }
+    [data-theme="light"] .pub-card.c1 .pub-abstract { color: #2563eb; }
+    [data-theme="light"] .pub-card.c1 .pub-year { color: #1e40af; background: #eff6ff; }
+    [data-theme="light"] .content .pub-card.c1 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c1 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c1 .pub-badge.badge-patent { background: #eff6ff; color: #1e40af; }
+    [data-theme="light"] .content .pub-card.c1 .pub-badge-outline { border-color: rgba(30, 64, 175, 0.35); color: #1e40af; }
+    [data-theme="light"] .patent-card.c1 { background: #dbeafe; border-color: #3b82f6; }
+    [data-theme="light"] .patent-card.c1:hover { border-color: #2563eb; }
+    [data-theme="light"] .patent-card.c1 .patent-title,
+    [data-theme="light"] .patent-card.c1 .patent-title a { color: #1e3a8a; }
+    [data-theme="light"] .patent-card.c1 .patent-title a:hover { color: #172554; }
+    [data-theme="light"] .patent-card.c1 .patent-meta { color: #1d4ed8; }
+    [data-theme="light"] .patent-card.c1 .patent-desc { color: #2563eb; }
+    [data-theme="light"] .content .patent-card.c1 .patent-chip { background: #eff6ff; color: #1e40af; border-color: rgba(30, 64, 175, 0.22); }
+    [data-theme="light"] .patent-card.c1 .pub-year { color: #1e40af; background: #eff6ff; }
+
+    /* —— c2 purple —— */
+    [data-theme="light"] .interest-card.c2 { background: #ede9fe; border-color: #8b5cf6; }
+    [data-theme="light"] .interest-card.c2 .interest-name { color: #5b21b6; }
+    [data-theme="light"] .interest-card.c2 .interest-desc { color: #6d28d9; }
+    [data-theme="light"] .interest-card.c2:hover { border-color: #7c3aed; }
+    [data-theme="light"] .pub-card.c2 { background: #ede9fe; border-color: #8b5cf6; }
+    [data-theme="light"] .pub-card.c2:hover { border-color: #7c3aed; }
+    [data-theme="light"] .pub-card.c2 .pub-title,
+    [data-theme="light"] .pub-card.c2 .pub-title a { color: #5b21b6; }
+    [data-theme="light"] .pub-card.c2 .pub-title a:hover { color: #4c1d95; }
+    [data-theme="light"] .pub-card.c2 .pub-authors { color: #6d28d9; }
+    [data-theme="light"] .pub-card.c2 .pub-abstract { color: #7c3aed; }
+    [data-theme="light"] .pub-card.c2 .pub-year { color: #5b21b6; background: #f5f3ff; }
+    [data-theme="light"] .content .pub-card.c2 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c2 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c2 .pub-badge.badge-patent { background: #f5f3ff; color: #5b21b6; }
+    [data-theme="light"] .content .pub-card.c2 .pub-badge-outline { border-color: rgba(91, 33, 182, 0.35); color: #5b21b6; }
+    [data-theme="light"] .patent-card.c2 { background: #ede9fe; border-color: #8b5cf6; }
+    [data-theme="light"] .patent-card.c2:hover { border-color: #7c3aed; }
+    [data-theme="light"] .patent-card.c2 .patent-title,
+    [data-theme="light"] .patent-card.c2 .patent-title a { color: #5b21b6; }
+    [data-theme="light"] .patent-card.c2 .patent-meta { color: #6d28d9; }
+    [data-theme="light"] .patent-card.c2 .patent-desc { color: #7c3aed; }
+    [data-theme="light"] .content .patent-card.c2 .patent-chip { background: #f5f3ff; color: #5b21b6; border-color: rgba(91, 33, 182, 0.22); }
+    [data-theme="light"] .patent-card.c2 .pub-year { color: #5b21b6; background: #f5f3ff; }
+    [data-theme="light"] .content .patent-card.c2 .pub-badge.badge-patent { background: #f5f3ff; color: #5b21b6; }
+
+    /* —— c3 green —— */
+    [data-theme="light"] .interest-card.c3 { background: #d1fae5; border-color: #10b981; }
+    [data-theme="light"] .interest-card.c3 .interest-name { color: #065f46; }
+    [data-theme="light"] .interest-card.c3 .interest-desc { color: #047857; }
+    [data-theme="light"] .interest-card.c3:hover { border-color: #059669; }
+    [data-theme="light"] .pub-card.c3 { background: #d1fae5; border-color: #10b981; }
+    [data-theme="light"] .pub-card.c3:hover { border-color: #059669; }
+    [data-theme="light"] .pub-card.c3 .pub-title,
+    [data-theme="light"] .pub-card.c3 .pub-title a { color: #065f46; }
+    [data-theme="light"] .pub-card.c3 .pub-title a:hover { color: #064e3b; }
+    [data-theme="light"] .pub-card.c3 .pub-authors { color: #047857; }
+    [data-theme="light"] .pub-card.c3 .pub-abstract { color: #059669; }
+    [data-theme="light"] .pub-card.c3 .pub-year { color: #065f46; background: #ecfdf5; }
+    [data-theme="light"] .content .pub-card.c3 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c3 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c3 .pub-badge.badge-patent { background: #ecfdf5; color: #065f46; }
+    [data-theme="light"] .content .pub-card.c3 .pub-badge-outline { border-color: rgba(6, 95, 70, 0.35); color: #065f46; }
+    [data-theme="light"] .patent-card.c3 { background: #d1fae5; border-color: #10b981; }
+    [data-theme="light"] .patent-card.c3:hover { border-color: #059669; }
+    [data-theme="light"] .patent-card.c3 .patent-title,
+    [data-theme="light"] .patent-card.c3 .patent-title a { color: #065f46; }
+    [data-theme="light"] .patent-card.c3 .patent-meta { color: #047857; }
+    [data-theme="light"] .patent-card.c3 .patent-desc { color: #059669; }
+    [data-theme="light"] .content .patent-card.c3 .patent-chip { background: #ecfdf5; color: #065f46; border-color: rgba(6, 95, 70, 0.2); }
+    [data-theme="light"] .patent-card.c3 .pub-year { color: #065f46; background: #ecfdf5; }
+
+    /* —— c4 cream / amber —— */
+    [data-theme="light"] .interest-card.c4 { background: #fef3c7; border-color: #d97706; }
+    [data-theme="light"] .interest-card.c4 .interest-name { color: #92400e; }
+    [data-theme="light"] .interest-card.c4 .interest-desc { color: #b45309; }
+    [data-theme="light"] .interest-card.c4:hover { border-color: #b45309; }
+    [data-theme="light"] .pub-card.c4 { background: #fef3c7; border-color: #d97706; }
+    [data-theme="light"] .pub-card.c4:hover { border-color: #b45309; }
+    [data-theme="light"] .pub-card.c4 .pub-title,
+    [data-theme="light"] .pub-card.c4 .pub-title a { color: #92400e; }
+    [data-theme="light"] .pub-card.c4 .pub-title a:hover { color: #78350f; }
+    [data-theme="light"] .pub-card.c4 .pub-authors { color: #b45309; }
+    [data-theme="light"] .pub-card.c4 .pub-abstract { color: #d97706; }
+    [data-theme="light"] .pub-card.c4 .pub-year { color: #92400e; background: #fffbeb; }
+    [data-theme="light"] .content .pub-card.c4 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c4 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c4 .pub-badge.badge-patent { background: #fffbeb; color: #92400e; }
+    [data-theme="light"] .content .pub-card.c4 .pub-badge-outline { border-color: rgba(146, 64, 14, 0.35); color: #92400e; }
+    [data-theme="light"] .patent-card.c4 { background: #fef3c7; border-color: #d97706; }
+    [data-theme="light"] .patent-card.c4:hover { border-color: #b45309; }
+    [data-theme="light"] .patent-card.c4 .patent-title,
+    [data-theme="light"] .patent-card.c4 .patent-title a { color: #92400e; }
+    [data-theme="light"] .patent-card.c4 .patent-meta { color: #b45309; }
+    [data-theme="light"] .patent-card.c4 .patent-desc { color: #d97706; }
+    [data-theme="light"] .content .patent-card.c4 .patent-chip { background: #fffbeb; color: #92400e; border-color: rgba(146, 64, 14, 0.25); }
+    [data-theme="light"] .patent-card.c4 .pub-year { color: #92400e; background: #fffbeb; }
+
+    /* —— c5 pink —— */
+    [data-theme="light"] .interest-card.c5 { background: #fce7f3; border-color: #ec4899; }
+    [data-theme="light"] .interest-card.c5 .interest-name { color: #831843; }
+    [data-theme="light"] .interest-card.c5 .interest-desc { color: #9d174d; }
+    [data-theme="light"] .interest-card.c5:hover { border-color: #db2777; }
+    [data-theme="light"] .pub-card.c5 { background: #fce7f3; border-color: #ec4899; }
+    [data-theme="light"] .pub-card.c5:hover { border-color: #db2777; }
+    [data-theme="light"] .pub-card.c5 .pub-title,
+    [data-theme="light"] .pub-card.c5 .pub-title a { color: #831843; }
+    [data-theme="light"] .pub-card.c5 .pub-title a:hover { color: #701a35; }
+    [data-theme="light"] .pub-card.c5 .pub-authors { color: #9d174d; }
+    [data-theme="light"] .pub-card.c5 .pub-abstract { color: #be185d; }
+    [data-theme="light"] .pub-card.c5 .pub-year { color: #831843; background: #fdf2f8; }
+    [data-theme="light"] .content .pub-card.c5 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c5 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c5 .pub-badge.badge-patent { background: #fdf2f8; color: #831843; }
+    [data-theme="light"] .content .pub-card.c5 .pub-badge-outline { border-color: rgba(131, 24, 67, 0.35); color: #831843; }
+    [data-theme="light"] .patent-card.c5 { background: #fce7f3; border-color: #ec4899; }
+    [data-theme="light"] .patent-card.c5:hover { border-color: #db2777; }
+    [data-theme="light"] .patent-card.c5 .patent-title,
+    [data-theme="light"] .patent-card.c5 .patent-title a { color: #831843; }
+    [data-theme="light"] .patent-card.c5 .patent-title a:hover { color: #701a35; }
+    [data-theme="light"] .patent-card.c5 .patent-meta { color: #9d174d; }
+    [data-theme="light"] .patent-card.c5 .patent-desc { color: #be185d; }
+    [data-theme="light"] .content .patent-card.c5 .patent-chip { background: #fdf2f8; color: #831843; border-color: rgba(131, 24, 67, 0.22); }
+    [data-theme="light"] .patent-card.c5 .pub-year { color: #831843; background: #fdf2f8; }
+
+    /* —— c6 indigo —— */
+    [data-theme="light"] .interest-card.c6 { background: #e0e7ff; border-color: #6366f1; }
+    [data-theme="light"] .interest-card.c6 .interest-name { color: #312e81; }
+    [data-theme="light"] .interest-card.c6 .interest-desc { color: #4338ca; }
+    [data-theme="light"] .interest-card.c6:hover { border-color: #4f46e5; }
+    [data-theme="light"] .pub-card.c6 { background: #e0e7ff; border-color: #6366f1; }
+    [data-theme="light"] .pub-card.c6:hover { border-color: #4f46e5; }
+    [data-theme="light"] .pub-card.c6 .pub-title,
+    [data-theme="light"] .pub-card.c6 .pub-title a { color: #312e81; }
+    [data-theme="light"] .pub-card.c6 .pub-title a:hover { color: #1e1b4b; }
+    [data-theme="light"] .pub-card.c6 .pub-authors { color: #4338ca; }
+    [data-theme="light"] .pub-card.c6 .pub-abstract { color: #4f46e5; }
+    [data-theme="light"] .pub-card.c6 .pub-year { color: #3730a3; background: #eef2ff; }
+    [data-theme="light"] .content .pub-card.c6 .pub-badge.badge-springer,
+    [data-theme="light"] .content .pub-card.c6 .pub-badge.badge-ieee,
+    [data-theme="light"] .content .pub-card.c6 .pub-badge.badge-patent { background: #eef2ff; color: #3730a3; }
+    [data-theme="light"] .content .pub-card.c6 .pub-badge-outline { border-color: rgba(55, 48, 163, 0.35); color: #3730a3; }
+    [data-theme="light"] .patent-card.c6 { background: #e0e7ff; border-color: #6366f1; }
+    [data-theme="light"] .patent-card.c6:hover { border-color: #4f46e5; }
+    [data-theme="light"] .patent-card.c6 .patent-title,
+    [data-theme="light"] .patent-card.c6 .patent-title a { color: #312e81; }
+    [data-theme="light"] .patent-card.c6 .patent-meta { color: #4338ca; }
+    [data-theme="light"] .patent-card.c6 .patent-desc { color: #4f46e5; }
+    [data-theme="light"] .content .patent-card.c6 .patent-chip { background: #eef2ff; color: #3730a3; border-color: rgba(55, 48, 163, 0.22); }
+    [data-theme="light"] .patent-card.c6 .pub-year { color: #3730a3; background: #eef2ff; }
+
+    /* Dark mode: strip palette */
+    [data-theme="dark"] .interest-card.c1,
+    [data-theme="dark"] .interest-card.c2,
+    [data-theme="dark"] .interest-card.c3,
+    [data-theme="dark"] .interest-card.c4,
+    [data-theme="dark"] .interest-card.c5,
+    [data-theme="dark"] .interest-card.c6 { background: var(--bg2); border-color: var(--border); }
+    [data-theme="dark"] .interest-card.c1:hover,
+    [data-theme="dark"] .interest-card.c2:hover,
+    [data-theme="dark"] .interest-card.c3:hover,
+    [data-theme="dark"] .interest-card.c4:hover,
+    [data-theme="dark"] .interest-card.c5:hover,
+    [data-theme="dark"] .interest-card.c6:hover { border-color: var(--accent); }
+    [data-theme="dark"] .interest-card .interest-name { color: var(--text); }
+    [data-theme="dark"] .interest-card .interest-desc { color: var(--muted); }
+
+    [data-theme="dark"] .pub-card.c1,
+    [data-theme="dark"] .pub-card.c2,
+    [data-theme="dark"] .pub-card.c3,
+    [data-theme="dark"] .pub-card.c4,
+    [data-theme="dark"] .pub-card.c5,
+    [data-theme="dark"] .pub-card.c6 { background: var(--bg2); border-color: var(--border); }
+    [data-theme="dark"] .pub-card.c1:hover,
+    [data-theme="dark"] .pub-card.c2:hover,
+    [data-theme="dark"] .pub-card.c3:hover,
+    [data-theme="dark"] .pub-card.c4:hover,
+    [data-theme="dark"] .pub-card.c5:hover,
+    [data-theme="dark"] .pub-card.c6:hover { border-color: var(--accent); }
+    [data-theme="dark"] .pub-card .pub-title,
+    [data-theme="dark"] .pub-card .pub-title a { color: var(--text); }
+    [data-theme="dark"] .pub-card .pub-title a:hover { color: var(--accent); }
+    [data-theme="dark"] .pub-card .pub-authors,
+    [data-theme="dark"] .pub-card .pub-abstract { color: var(--text-secondary); }
+    [data-theme="dark"] .pub-card .pub-year,
+    [data-theme="dark"] .patent-card .pub-year { color: var(--muted); background: var(--bg3); }
+    [data-theme="dark"] .content .pub-badge.badge-springer,
+    [data-theme="dark"] .content .pub-badge.badge-ieee,
+    [data-theme="dark"] .content .pub-badge.badge-patent { background: var(--bg3); color: var(--text-secondary); }
+    [data-theme="dark"] .content .pub-badge-outline { border-color: var(--border); color: var(--text-secondary); }
+
+    [data-theme="dark"] .patent-card.c1,
+    [data-theme="dark"] .patent-card.c2,
+    [data-theme="dark"] .patent-card.c3,
+    [data-theme="dark"] .patent-card.c4,
+    [data-theme="dark"] .patent-card.c5,
+    [data-theme="dark"] .patent-card.c6 { background: var(--bg2); border-color: var(--border); }
+    [data-theme="dark"] .patent-card.c1:hover,
+    [data-theme="dark"] .patent-card.c2:hover,
+    [data-theme="dark"] .patent-card.c3:hover,
+    [data-theme="dark"] .patent-card.c4:hover,
+    [data-theme="dark"] .patent-card.c5:hover,
+    [data-theme="dark"] .patent-card.c6:hover { border-color: var(--accent); }
+    [data-theme="dark"] .patent-card .patent-title,
+    [data-theme="dark"] .patent-card .patent-title a { color: var(--text); }
+    [data-theme="dark"] .patent-card .patent-title a:hover { color: var(--accent); }
+    [data-theme="dark"] .patent-card .patent-meta,
+    [data-theme="dark"] .patent-card .patent-desc { color: var(--text-secondary); }
+    [data-theme="dark"] .content .patent-card .patent-chip { background: var(--bg3); color: var(--muted); border-color: transparent; }
+
+    @media (max-width: 600px) { .interests-grid { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -93,19 +306,19 @@
   <div class="content">
     <p class="section-label">Research Interests</p>
     <div class="interests-grid">
-      <div class="interest-card ic1"><div class="interest-icon">📈</div><div class="interest-name">AI for Finance</div><div class="interest-desc">Factor investing, portfolio optimization, quantitative research</div></div>
-      <div class="interest-card ic2"><div class="interest-icon">🧠</div><div class="interest-name">LLMs &amp; GenAI</div><div class="interest-desc">Agentic systems, RAG, interpretability, production deployment</div></div>
-      <div class="interest-card ic3"><div class="interest-icon">🏥</div><div class="interest-name">Healthcare AI</div><div class="interest-desc">Predictive analytics, survival analysis, clinical data modeling</div></div>
-      <div class="interest-card ic4"><div class="interest-icon">👁️</div><div class="interest-name">Computer Vision</div><div class="interest-desc">Motion detection, gesture recognition, HCI</div></div>
-      <div class="interest-card ic5"><div class="interest-icon">📊</div><div class="interest-name">Predictive Modeling</div><div class="interest-desc">Time-series, quantile regression, risk modeling</div></div>
-      <div class="interest-card ic6"><div class="interest-icon">🔬</div><div class="interest-name">MLOps</div><div class="interest-desc">Production ML pipelines, model monitoring, CI/CD</div></div>
+      <div class="interest-card c4"><div class="interest-name">AI for Finance</div><div class="interest-desc">Factor investing, portfolio optimization, quantitative research</div></div>
+      <div class="interest-card c1"><div class="interest-name">LLMs &amp; GenAI</div><div class="interest-desc">Agentic systems, RAG, interpretability, production deployment</div></div>
+      <div class="interest-card c6"><div class="interest-name">Healthcare AI</div><div class="interest-desc">Predictive analytics, survival analysis, clinical data modeling</div></div>
+      <div class="interest-card c2"><div class="interest-name">Computer Vision</div><div class="interest-desc">Motion detection, gesture recognition, HCI</div></div>
+      <div class="interest-card c5"><div class="interest-name">Predictive Modeling</div><div class="interest-desc">Time-series, quantile regression, risk modeling</div></div>
+      <div class="interest-card c3"><div class="interest-name">MLOps</div><div class="interest-desc">Production ML pipelines, model monitoring, CI/CD</div></div>
     </div>
 
     <p class="section-label">Publications</p>
 
-    <div class="pub-card pc-green">
+    <div class="pub-card c1">
       <div class="pub-top">
-        <div class="pub-venue-row"><span class="pub-badge badge-springer">Springer Nature</span><span class="pub-badge badge-springer" style="background:transparent;border:1px solid var(--tag-green-text)">ICIAI 2025</span></div>
+        <div class="pub-venue-row"><span class="pub-badge badge-springer">Springer Nature</span><span class="pub-badge pub-badge-outline">ICIAI 2025</span></div>
         <span class="pub-year">Jan 2026</span>
       </div>
       <div class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-981-95-0887-7_12#Abs1" target="_blank">AI for Factor Investing: A Comprehensive Survey</a></div>
@@ -117,9 +330,9 @@
       </div>
     </div>
 
-    <div class="pub-card pc-blue">
+    <div class="pub-card c3">
       <div class="pub-top">
-        <div class="pub-venue-row"><span class="pub-badge badge-ieee">IEEE</span><span class="pub-badge badge-ieee" style="background:transparent;border:1px solid var(--tag-blue-text)">InHeNce 2021</span></div>
+        <div class="pub-venue-row"><span class="pub-badge badge-ieee">IEEE</span><span class="pub-badge pub-badge-outline">InHeNce 2021</span></div>
         <span class="pub-year">Jun 2021</span>
       </div>
       <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/9537264" target="_blank">Scheduling for Healthcare Centre for COVID-19: Deep Learning and Genetic Algorithmic Approach</a></div>
@@ -132,8 +345,7 @@
     </div>
 
     <p class="section-label" style="margin-top:40px">Patent</p>
-    <div class="patent-card">
-      <div class="patent-icon-wrap">🔏</div>
+    <div class="patent-card c2">
       <div class="patent-body">
         <div class="pub-top">
           <div class="pub-venue-row"><span class="pub-badge badge-patent">Filed Patent</span></div>

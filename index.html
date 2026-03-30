@@ -38,6 +38,22 @@
       margin-bottom: 28px;
     }
     .tc-tag { padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+    a.tc-tag {
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+    a.tc-tag:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      filter: brightness(0.97);
+    }
+    a.tc-tag:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    [data-theme="dark"] a.tc-tag:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); }
     .tc-blue   { background: #ddf4ff; color: #0550ae; }
     .tc-purple { background: #fbefff; color: #8250df; }
     .tc-green  { background: #dafbe1; color: #116329; }
@@ -177,18 +193,18 @@
       <h1 class="hero-name">Rasmika <span>Billa</span></h1>
       <p class="hero-tagline">MS Computer Science &middot; NYU Courant</p>
       <div class="tag-cloud">
-        <span class="tc-tag tc-blue">AI/ML Engineer</span>
-        <span class="tc-tag tc-purple">LLM Builder</span>
-        <span class="tc-tag tc-green">NYU Courant</span>
-        <span class="tc-tag tc-orange">Shell Alumni</span>
-        <span class="tc-tag tc-pink">Interplay Alumni</span>
-        <span class="tc-tag tc-teal">RAG Systems</span>
-        <span class="tc-tag tc-blue">Agentic AI</span>
-        <span class="tc-tag tc-purple">Researcher</span>
-        <span class="tc-tag tc-green">Data Science</span>
-        <span class="tc-tag tc-orange">Python</span>
-        <span class="tc-tag tc-pink">LangChain</span>
-        <span class="tc-tag tc-teal">Published Author</span>
+        <a href="/projects/" class="tc-tag tc-blue">AI/ML Engineer</a>
+        <a href="/projects/" class="tc-tag tc-purple">LLM Builder</a>
+        <a href="/research/" class="tc-tag tc-green">NYU Courant</a>
+        <a href="/projects/" class="tc-tag tc-orange">Shell Alumni</a>
+        <a href="/projects/" class="tc-tag tc-pink">Interplay Alumni</a>
+        <a href="/projects/" class="tc-tag tc-teal">RAG Systems</a>
+        <a href="/projects/" class="tc-tag tc-blue">Agentic AI</a>
+        <a href="/research/" class="tc-tag tc-purple">Researcher</a>
+        <a href="/projects/" class="tc-tag tc-green">Data Science</a>
+        <a href="/projects/" class="tc-tag tc-orange">Python</a>
+        <a href="/projects/" class="tc-tag tc-pink">LangChain</a>
+        <a href="/research/" class="tc-tag tc-teal">Published Author</a>
       </div>
       <p class="hero-bio">I build production-grade AI systems. LLM-powered agentic pipelines, RAG architectures, and ML models that ship to real users.<br>Previously at Shell and Interplay.</p>
       <div class="hero-actions">
