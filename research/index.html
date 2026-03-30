@@ -15,14 +15,14 @@
     .interest-card:hover { border-color: var(--accent); }
     /* dark mode — plain */
     [data-theme="dark"] .interest-card { background: var(--bg2); }
-    /* light mode — subtle colors */
-    [data-theme="light"] .interest-card.ic1 { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
-    [data-theme="light"] .interest-card.ic2 { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
-    [data-theme="light"] .interest-card.ic3 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
-    [data-theme="light"] .interest-card.ic4 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
-    [data-theme="light"] .interest-card.ic5 { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); }
-    [data-theme="light"] .interest-card.ic6 { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
-    .interest-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    /* Option F — Monochromatic Blue */
+    [data-theme="light"] .interest-card.ic1 { background: #dbeafe; }
+    [data-theme="light"] .interest-card.ic2 { background: #bfdbfe; }
+    [data-theme="light"] .interest-card.ic3 { background: #e0f2fe; }
+    [data-theme="light"] .interest-card.ic4 { background: #dbeafe; }
+    [data-theme="light"] .interest-card.ic5 { background: #bfdbfe; }
+    [data-theme="light"] .interest-card.ic6 { background: #e0f2fe; }
+    .interest-icon { display: none; }
     .interest-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
     .interest-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
 
@@ -30,8 +30,8 @@
     .pub-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: border-color 0.2s; }
     .pub-card:hover { border-color: var(--accent); }
     [data-theme="dark"] .pub-card { background: var(--bg2); }
-    [data-theme="light"] .pub-card.pc-green  { background: linear-gradient(135deg, #f1f8f4, #e8f5e9); }
-    [data-theme="light"] .pub-card.pc-blue   { background: linear-gradient(135deg, #f0f6ff, #e3f2fd); }
+    [data-theme="light"] .pub-card.pc-green  { background: #bfdbfe; }
+    [data-theme="light"] .pub-card.pc-blue   { background: #dbeafe; }
 
     .pub-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
     .pub-venue-row { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -56,8 +56,8 @@
     .patent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; display: flex; gap: 20px; transition: border-color 0.2s; }
     .patent-card:hover { border-color: var(--tag-purple-text); }
     [data-theme="dark"]  .patent-card { background: var(--bg2); }
-    [data-theme="light"] .patent-card { background: linear-gradient(135deg, #f5f0ff, #ede7f6); }
-    .patent-icon-wrap { width: 56px; height: 56px; border-radius: 12px; background: var(--tag-purple-bg); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
+    [data-theme="light"] .patent-card { background: #e0f2fe; }
+    .patent-icon-wrap { display: none; }
     .patent-body { flex: 1; }
     .patent-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
     .patent-title a { color: var(--text); }
@@ -135,7 +135,10 @@
     <div class="patent-card">
       <div class="patent-icon-wrap">🔏</div>
       <div class="patent-body">
-        <div class="pub-venue-row" style="margin-bottom:6px"><span class="pub-badge badge-patent">Filed Patent</span><span class="pub-year">Jun 2021</span></div>
+        <div class="pub-top">
+          <div class="pub-venue-row"><span class="pub-badge badge-patent">Filed Patent</span></div>
+          <span class="pub-year">Jun 2021</span>
+        </div>
         <div class="patent-title"><a href="https://vitap.irins.org/profile/302822" target="_blank">Py &ndash; Digital Writing Pad (Python Based Motion Sensing Digital Writing Pad)</a></div>
         <div class="patent-meta">App No. 202141026740</div>
         <div class="patent-desc">A motion-based digital writing tool using Transformer architecture that enables users to capture ideas on-screen with any stylus. Utilizes Deep Average Network for hand motion detection, significantly reducing hardware costs while making digital writing accessible to underserved communities.</div>
